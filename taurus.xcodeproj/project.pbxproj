@@ -14,6 +14,8 @@
 		9128E036254F866E005CB262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9128E034254F866E005CB262 /* Main.storyboard */; };
 		9128E042254F866E005CB262 /* taurusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128E041254F866E005CB262 /* taurusTests.swift */; };
 		9128E04D254F866E005CB262 /* taurusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128E04C254F866E005CB262 /* taurusUITests.swift */; };
+		913C7B6225A9170500EC7D2A /* GeminiParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C7B6125A9170500EC7D2A /* GeminiParser.swift */; };
+		913C7B6725A9176100EC7D2A /* GeminiParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C7B6625A9176100EC7D2A /* GeminiParserTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		9128E048254F866E005CB262 /* taurusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = taurusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9128E04C254F866E005CB262 /* taurusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taurusUITests.swift; sourceTree = "<group>"; };
 		9128E04E254F866E005CB262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		913C7B6125A9170500EC7D2A /* GeminiParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiParser.swift; sourceTree = "<group>"; };
+		913C7B6625A9176100EC7D2A /* GeminiParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiParserTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 				9128E037254F866E005CB262 /* Info.plist */,
 				9128E038254F866E005CB262 /* taurus.entitlements */,
 				9128E031254F866E005CB262 /* Preview Content */,
+				913C7B6125A9170500EC7D2A /* GeminiParser.swift */,
 			);
 			path = taurus;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 		9128E040254F866E005CB262 /* taurusTests */ = {
 			isa = PBXGroup;
 			children = (
+				913C7B6625A9176100EC7D2A /* GeminiParserTests.swift */,
 				9128E041254F866E005CB262 /* taurusTests.swift */,
 				9128E043254F866E005CB262 /* Info.plist */,
 			);
@@ -198,7 +204,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1210;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					9128E027254F866D005CB262 = {
 						CreatedOnToolsVersion = 12.1;
@@ -267,6 +273,7 @@
 			files = (
 				9128E02E254F866D005CB262 /* ContentView.swift in Sources */,
 				9128E02C254F866D005CB262 /* AppDelegate.swift in Sources */,
+				913C7B6225A9170500EC7D2A /* GeminiParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9128E042254F866E005CB262 /* taurusTests.swift in Sources */,
+				913C7B6725A9176100EC7D2A /* GeminiParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +442,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = taurus/taurus.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"taurus/Preview Content\"";
@@ -456,6 +465,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = taurus/taurus.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"taurus/Preview Content\"";
