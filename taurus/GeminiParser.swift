@@ -18,6 +18,7 @@ struct Token: Equatable {
     var end: Pos
     var type: String
     var value: String
+    var hard: Bool? = nil
 }
 
 func ws(code: UInt8?) -> Bool {
@@ -43,7 +44,7 @@ func parseGemini() -> (String, Bool) -> [Token] {
         var value: String
         var eol: String
         
-        func add(type: String, value: Substring) {
+        func add(type: String, value: Substring, hard: Bool? = nil) {
             let start = now()
             
             offset += value.count
@@ -58,7 +59,7 @@ func parseGemini() -> (String, Bool) -> [Token] {
             
             let end = now()
             
-            let token = Token(start: start, end: end, type: type, value: String(value))
+            let token = Token(start: start, end: end, type: type, value: String(value), hard: hard)
             
             results.append(token)
         }

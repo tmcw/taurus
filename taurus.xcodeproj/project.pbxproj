@@ -16,6 +16,8 @@
 		9128E04D254F866E005CB262 /* taurusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128E04C254F866E005CB262 /* taurusUITests.swift */; };
 		913C7B6225A9170500EC7D2A /* GeminiParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C7B6125A9170500EC7D2A /* GeminiParser.swift */; };
 		913C7B6725A9176100EC7D2A /* GeminiParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C7B6625A9176100EC7D2A /* GeminiParserTests.swift */; };
+		91F6D08725AF689800ED0411 /* GeminiCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F6D08625AF689800ED0411 /* GeminiCompiler.swift */; };
+		91F6D08C25AF68C300ED0411 /* GeminiCompilerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F6D08B25AF68C300ED0411 /* GeminiCompilerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		9128E04E254F866E005CB262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		913C7B6125A9170500EC7D2A /* GeminiParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiParser.swift; sourceTree = "<group>"; };
 		913C7B6625A9176100EC7D2A /* GeminiParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiParserTests.swift; sourceTree = "<group>"; };
+		91F6D08625AF689800ED0411 /* GeminiCompiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiCompiler.swift; sourceTree = "<group>"; };
+		91F6D08B25AF68C300ED0411 /* GeminiCompilerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiCompilerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 				9128E038254F866E005CB262 /* taurus.entitlements */,
 				9128E031254F866E005CB262 /* Preview Content */,
 				913C7B6125A9170500EC7D2A /* GeminiParser.swift */,
+				91F6D08625AF689800ED0411 /* GeminiCompiler.swift */,
 			);
 			path = taurus;
 			sourceTree = "<group>";
@@ -128,6 +133,7 @@
 				913C7B6625A9176100EC7D2A /* GeminiParserTests.swift */,
 				9128E041254F866E005CB262 /* taurusTests.swift */,
 				9128E043254F866E005CB262 /* Info.plist */,
+				91F6D08B25AF68C300ED0411 /* GeminiCompilerTests.swift */,
 			);
 			path = taurusTests;
 			sourceTree = "<group>";
@@ -274,6 +280,7 @@
 				9128E02E254F866D005CB262 /* ContentView.swift in Sources */,
 				9128E02C254F866D005CB262 /* AppDelegate.swift in Sources */,
 				913C7B6225A9170500EC7D2A /* GeminiParser.swift in Sources */,
+				91F6D08725AF689800ED0411 /* GeminiCompiler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9128E042254F866E005CB262 /* taurusTests.swift in Sources */,
+				91F6D08C25AF68C300ED0411 /* GeminiCompilerTests.swift in Sources */,
 				913C7B6725A9176100EC7D2A /* GeminiParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
