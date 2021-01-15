@@ -53,7 +53,6 @@ func compileGemini(tokens: [Token]) -> Node {
     ];
     var index = 0
     var token: Token
-    var node: Node
     var values: [String]
     
     func addNode(node: Node) {
@@ -96,28 +95,17 @@ func compileGemini(tokens: [Token]) -> Node {
             }
             
             addNode(node: Node(data: Data.link(value: value, url: url), position: Position(fromToken: token)))
-        } /* else if (token.type == "listSequence") {
-            if (stack[stack.count - 1] is ListNode) {
-                enterNode(node: ListNode(position: Position(start: token.start))
-            }
-            
+        } else if (token.type == "listSequence") {
             if (tokens[index + 1].type == "whitespace") {
                 index += 1
             }
             if (tokens[index + 1].type == "listText") {
                 index += 1
-                node = enterNode(node: ListItemNode(value: tokens[index].value, position: Position(fromToken: token)))
+                addNode(node: Node(data: Data.listItem(value: tokens[index].value), position: Position(fromToken: token)))
             } else {
-                node = enterNode(node: ListItemNode(value: "", position: Position(fromToken: token.start)))
+                addNode(node: Node(data: Data.listItem(value: ""), position: Position(fromToken: token)))
             }
-            
-            if (
-                tokens[index + 1].type != "eol" ||
-                    tokens[index + 2].type != "listSequence"
-            ) {
-                _ = exit(token: tokens[index])
-            }
-        } */ else if (token.type == "preSequence") {
+        } else if (token.type == "preSequence") {
             values = []
             var alt: String? = nil
             
