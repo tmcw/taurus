@@ -42,12 +42,14 @@ func compileGemini(tokens: [Token]) -> Node {
     var node: Node
     var values: [String]
     
-    func enter(type: String, value: String? = nil, rank: Int? = nil, children: [Node] = [], token: Token) -> Node {
+    func enter(type: String, value: String? = nil, rank: Int? = nil, alt: String? = nil, url: String? = nil, children: [Node] = [], token: Token) -> Node {
         var node = Node(
             type: type,
             value: value,
             children: children,
             position: Position(start: point(d: token.start)),
+            alt: alt,
+            url: url,
             rank: rank
         )
         stack[stack.endIndex - 1].children.append(node)
@@ -89,23 +91,26 @@ func compileGemini(tokens: [Token]) -> Node {
             
             _ = exit(token: tokens[index])
         } else if (token.type == "linkSequence") {
-            node = enter(type: "link", value: "", token: token)
+            var value = ""
+            var url = ""
             
             if (tokens[index + 1].type == "whitespace") {
                 index += 1
             }
             if (tokens[index + 1].type == "linkUrl") {
                 index += 1
-                node.url = tokens[index].value
+                url = tokens[index].value
                 
                 if (tokens[index + 1].type == "whitespace") {
                     index += 1
                 }
                 if (tokens[index + 1].type == "linkText") {
                     index += 1
-                    node.value = tokens[index].value
+                    value = tokens[index].value
                 }
             }
+            
+            node = enter(type: "link", value: value, url: url, token: token)
             
             _ = exit(token: tokens[index])
         } else if (token.type == "listSequence") {
@@ -133,12 +138,12 @@ func compileGemini(tokens: [Token]) -> Node {
                 _ = exit(token: tokens[index])
             }
         } else if (token.type == "preSequence") {
-            node = enter(type: "pre", value: "", token: token)
             values = []
+            var alt: String? = nil
             
             if (tokens[index + 1].type == "preAlt") {
                 index += 1
-                node.alt = tokens[index].value
+                alt = tokens[index].value
             }
             
             // Slurp the first EOL.
@@ -166,7 +171,7 @@ func compileGemini(tokens: [Token]) -> Node {
                 index += 1
             }
             
-            node.value = values.joined(separator: "")
+            node = enter(type: "pre", value: values.joined(separator: ""), alt: alt, token: token)
             
             _ = exit(token: tokens[index])
         } else if (token.type == "quoteSequence") {

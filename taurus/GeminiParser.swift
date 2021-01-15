@@ -38,7 +38,6 @@ func parseGemini() -> (String, Bool) -> [Token] {
     
     func parse(buffer: String, done: Bool) -> [Token] {
         
-        var end = buffer.firstIndex(of: "\n")
         var start: String.Index = buffer.startIndex
         var results: [Token] = []
         var value: String
@@ -96,7 +95,7 @@ func parseGemini() -> (String, Bool) -> [Token] {
             else if (code == 35 /* `#` */) {
                 index = value.index(value.startIndex, offsetBy: 1)
                 var headerLevel: Int = 1
-                while (headerLevel < 3 && value[index].asciiValue == 35 /* `#` */) {
+                while (headerLevel < 3 && index < value.endIndex && value[index].asciiValue == 35 /* `#` */) {
                     index = value.index(index, offsetBy: 1)
                     headerLevel += 1
                 }
@@ -104,7 +103,7 @@ func parseGemini() -> (String, Bool) -> [Token] {
                 
                 // Optional whitespace.
                 start = index
-                while (ws(code: value[index].asciiValue)) {
+                while (index < value.endIndex && ws(code: value[index].asciiValue)) {
                     index = value.index(index, offsetBy: 1)
                 }
                 if (start != index) {
@@ -126,7 +125,7 @@ func parseGemini() -> (String, Bool) -> [Token] {
                 // Optional whitespace.
                 index = value.index(value.startIndex, offsetBy: 1)
                 let startOfContent = index
-                while (ws(code: value[index].asciiValue)) {
+                while (index < value.endIndex && ws(code: value[index].asciiValue)) {
                     index = value.index(index, offsetBy: 1)
                 }
                 if (index != startOfContent) {
@@ -185,7 +184,7 @@ func parseGemini() -> (String, Bool) -> [Token] {
                 
                 // Optional whitespace.
                 start = index
-                while (ws(code: value[index].asciiValue) && index < value.endIndex) {
+                while (index < value.endIndex && ws(code: value[index].asciiValue)) {
                     index = value.index(index, offsetBy: 1)
                 }
                 if (index != start) {
@@ -193,7 +192,7 @@ func parseGemini() -> (String, Bool) -> [Token] {
                 }
                 
                 if (index != value.endIndex) {
-                    add(type: "linkText", value: value[index..<value.endIndex])
+                    add(type: "quoteText", value: value[index..<value.endIndex])
                 }
             }
             else if (value.count != 0) {
@@ -201,8 +200,12 @@ func parseGemini() -> (String, Bool) -> [Token] {
             }
         }
         
+        var end = buffer.firstIndex(of: "\n")
+        print("buffer:")
+        print(buffer)
+        
         while (end != nil) {
-            value = values.joined(separator: "") + buffer[start...end!]
+            value = values.joined(separator: "") + buffer[start..<end!]
             values = []
             
             if (value.last?.asciiValue == 13 /* `\r` */) {
@@ -212,22 +215,27 @@ func parseGemini() -> (String, Bool) -> [Token] {
                 eol = "\n"
             }
             
+            print("Parsing line:")
+            print(value)
             parseLine(value: value)
             add(type: "eol", value: Substring(eol)/*, {hard: !preformatted && !value.count}*/)
             
-            start = value.index(end!, offsetBy: 1)
+            start = buffer.index(end!, offsetBy: 1)
+            print("next line")
+            print(buffer[start..<buffer.endIndex])
             // TODO: This is where I'm leaving off, and it's a hard one. String.Index
             // and String.IndexDistance are not working well here.
-            let endOffset = buffer[start..<buffer.endIndex].firstIndex(of: "\n")!;
-            let endI = buffer.distance(from: buffer.startIndex, to: endOffset);
-            end = buffer.index(start, offsetBy: endI)
+            end = buffer[start..<buffer.endIndex].firstIndex(of: "\n");
         }
         
         if (buffer != "") {
+            print("last line:")
+            print(buffer[start..<buffer.endIndex])
             values.append(buffer[start..<buffer.endIndex])
         }
         
         if (done) {
+            print(values.joined(separator: ""))
             parseLine(value: values.joined(separator: ""))
             add(type: "eof", value: Substring(""))
         }

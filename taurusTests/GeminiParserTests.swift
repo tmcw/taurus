@@ -17,6 +17,18 @@ class GeminiParserTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testTwoLines() throws {
+        XCTAssertEqual(parseGemini()("""
+one
+two
+""", true),
+    [taurus.Token(start: taurus.Pos(line: 1, column: 1, offset: 0), end: taurus.Pos(line: 1, column: 4, offset: 3), type: "text", value: "one", hard: nil),
+     taurus.Token(start: taurus.Pos(line: 1, column: 4, offset: 3), end: taurus.Pos(line: 2, column: 1, offset: 4), type: "eol", value: "\n", hard: nil),
+     taurus.Token(start: taurus.Pos(line: 2, column: 1, offset: 4), end: taurus.Pos(line: 2, column: 4, offset: 7), type: "text", value: "two", hard: nil),
+     taurus.Token(start: taurus.Pos(line: 2, column: 4, offset: 7), end: taurus.Pos(line: 2, column: 4, offset: 7), type: "eof", value: "", hard: nil)]
+        )
+    }
 
     func testPreSequence() throws {
         XCTAssertEqual(parseGemini()("```", true), [
@@ -33,24 +45,19 @@ class GeminiParserTests: XCTestCase {
         ])
     }
     
+    
     func testPreSequenceWithAlt() throws {
-        XCTAssertEqual(parseGemini()("```js", true), [
-            taurus.Token(
-                start: Pos(line: 1, column: 1, offset:0),
-                end: Pos(line:1, column: 4, offset:3),
-                type: "preSequence",
-                value: "```"),
-            taurus.Token(
-                start: Pos(line: 1, column: 4, offset:3),
-                end: Pos(line:1, column: 6, offset:5),
-                type: "preAlt",
-                value: "js"),
-            taurus.Token(
-                start: Pos(line: 1, column: 6, offset:5),
-                end: Pos(line:1, column: 6, offset:5),
-                type: "eof",
-                value: "")
-        ])
+        XCTAssertEqual(parseGemini()("""
+```js
+test
+```
+""", true), [taurus.Token(start: taurus.Pos(line: 1, column: 1, offset: 0), end: taurus.Pos(line: 1, column: 4, offset: 3), type: "preSequence", value: "```", hard: nil),
+             taurus.Token(start: taurus.Pos(line: 1, column: 4, offset: 3), end: taurus.Pos(line: 1, column: 6, offset: 5), type: "preAlt", value: "js", hard: nil),
+             taurus.Token(start: taurus.Pos(line: 1, column: 6, offset: 5), end: taurus.Pos(line: 2, column: 1, offset: 6), type: "eol", value: "\n", hard: nil),
+             taurus.Token(start: taurus.Pos(line: 2, column: 1, offset: 6), end: taurus.Pos(line: 2, column: 5, offset: 10), type: "preText", value: "test", hard: nil),
+             taurus.Token(start: taurus.Pos(line: 2, column: 5, offset: 10), end: taurus.Pos(line: 3, column: 1, offset: 11), type: "eol", value: "\n", hard: nil),
+             taurus.Token(start: taurus.Pos(line: 3, column: 1, offset: 11), end: taurus.Pos(line: 3, column: 4, offset: 14), type: "preSequence", value: "```", hard: nil),
+             taurus.Token(start: taurus.Pos(line: 3, column: 4, offset: 14), end: taurus.Pos(line: 3, column: 4, offset: 14), type: "eof", value: "", hard: nil)])
     }
     
     func testHeadingSequence() throws {
@@ -174,7 +181,7 @@ class GeminiParserTests: XCTestCase {
             taurus.Token(
                 start: Pos(line: 1, column: 3, offset:2),
                 end: Pos(line:1, column: 6, offset:5),
-                type: "linkText",
+                type: "quoteText",
                 value: "Yes"),
             taurus.Token(
                 start: Pos(line: 1, column: 6, offset:5),
