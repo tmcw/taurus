@@ -201,8 +201,6 @@ func parseGemini() -> (String, Bool) -> [Token] {
         }
         
         var end = buffer.firstIndex(of: "\n")
-        print("buffer:")
-        print(buffer)
         
         while (end != nil) {
             value = values.joined(separator: "") + buffer[start..<end!]
@@ -215,27 +213,20 @@ func parseGemini() -> (String, Bool) -> [Token] {
                 eol = "\n"
             }
             
-            print("Parsing line:")
-            print(value)
             parseLine(value: value)
             add(type: "eol", value: Substring(eol)/*, {hard: !preformatted && !value.count}*/)
             
             start = buffer.index(end!, offsetBy: 1)
-            print("next line")
-            print(buffer[start..<buffer.endIndex])
             // TODO: This is where I'm leaving off, and it's a hard one. String.Index
             // and String.IndexDistance are not working well here.
             end = buffer[start..<buffer.endIndex].firstIndex(of: "\n");
         }
         
         if (buffer != "") {
-            print("last line:")
-            print(buffer[start..<buffer.endIndex])
             values.append(buffer[start..<buffer.endIndex])
         }
         
         if (done) {
-            print(values.joined(separator: ""))
             parseLine(value: values.joined(separator: ""))
             add(type: "eof", value: Substring(""))
         }
