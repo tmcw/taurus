@@ -18,6 +18,15 @@ class GeminiParserTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    func testAltLineBreak() throws {
+        XCTAssertEqual(parseGemini()("foo\r\nbar", true),
+    [taurus.Token(start: taurus.Pos(line: 1, column: 1, offset: 0), end: taurus.Pos(line: 1, column: 4, offset: 3), type: "text", value: "one", hard: nil),
+     taurus.Token(start: taurus.Pos(line: 1, column: 4, offset: 3), end: taurus.Pos(line: 2, column: 1, offset: 4), type: "eol", value: "\n", hard: nil),
+     taurus.Token(start: taurus.Pos(line: 2, column: 1, offset: 4), end: taurus.Pos(line: 2, column: 4, offset: 7), type: "text", value: "two", hard: nil),
+     taurus.Token(start: taurus.Pos(line: 2, column: 4, offset: 7), end: taurus.Pos(line: 2, column: 4, offset: 7), type: "eof", value: "", hard: nil)]
+        )
+    }
+    
     func testTwoLines() throws {
         XCTAssertEqual(parseGemini()("""
 one

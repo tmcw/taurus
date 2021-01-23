@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Pos: Equatable {
+struct Pos: Equatable, Hashable {
     var line = 0
     var column = 0
     var offset = 0

@@ -8,8 +8,15 @@
 import SwiftUI
 import Network
 
+extension NSTextField {
+    open override var focusRingType: NSFocusRingType {
+        get { .none }
+        set { }
+    }
+}
+
 struct ContentView: View {
-    @State var content = ""
+    @State var content: String = ""
     
     // https://github.com/agnosticdev/NetworkConnectivity/blob/c51f7a0b8f9b0733b52bd2ddbd0425b6e5d6fbbb/Sources/NetworkConnectivity/NetworkConnectivity.swift#L95
     
@@ -72,7 +79,6 @@ struct ContentView: View {
             print("got receive")
             // Read data off the stream
             if let data = data, !data.isEmpty {
-                
                 self.content += String(decoding: data, as: UTF8.self)
             }
             
@@ -89,7 +95,6 @@ struct ContentView: View {
     }
     
     private func stateDidChange(to state: NWConnection.State) {
-        
         print("got state change")
         switch state {
         case .setup:
@@ -129,101 +134,51 @@ struct ContentView: View {
         }
     }
     
-    struct Chunk: Hashable {
-        var type = ""
-        var url = ""
-        var description = ""
-        var level = 0
-        
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(type + url + description)
-        }
-    }
-    
-    private func parsedContent() -> [Chunk] {
-        var chunks: [Chunk] = [];
-        return chunks;
+    func parsedContent() -> [Node]? {
+        return parseResponse(content: self.content)?.tree.children;
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center, spacing: 0.0) {
             HStack {
                 TextField("URL", text: $url, onCommit: loadUrl)
-                    .padding(.all)
-                    .font(Font.system(size: 15, weight: .medium))
-                    .background(Color.black)
-                    .foregroundColor(Color.white)
+                    .padding(10.0)
                     .textFieldStyle(PlainTextFieldStyle())
-            }.background(Color.white)
+                    .foregroundColor(Color("Foreground"))
+                    .background(Color("AccentBackground").cornerRadius(5.0))
+            }.padding(10.0)
+            
+            // Divider().padding(0.0)
             
             ScrollView(.vertical) {
-                /* VStack {
-                    ForEach(self.parsedContent(), id: \.self) { chunk in
-                        Group {
-                            if (chunk.type == "text") {
-                                Text(chunk.description)
-                                    .font(.body)
-                                    .lineSpacing(5.0)
-                                    .foregroundColor(Color.white)
-                                    .multilineTextAlignment(.leading)
-                                    .padding(.horizontal, 20.0)
-                                    .padding(.vertical, 5.0)
-                                    .lineLimit(nil)
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                            } else if (chunk.type == "heading") {
-                                Text(chunk.description)
-                                    .font(.title)
-                                    .lineSpacing(5.0)
-                                    .foregroundColor(Color.white)
-                                    .multilineTextAlignment(.leading)
-                                    .padding(.horizontal, 20.0)
-                                    .padding(.vertical, 5.0)
-                                    .lineLimit(nil)
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                            } else if (chunk.type == "pre") {
-                                Text(chunk.description)
-                                    .font(.mono)
-                                    .lineSpacing(5.0)
-                                    .foregroundColor(Color.white)
-                                    .multilineTextAlignment(.leading)
-                                    .padding(.horizontal, 20.0)
-                                    .padding(.vertical, 5.0)
-                                    .lineLimit(nil)
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                            } else {
-                                Button(action: {
-                                    self.url = chunk.url
-                                    loadUrl()
-                                }) {
-                                    Text(chunk.description)
-                                        .font(.body)
-                                        .lineSpacing(5.0)
-                                        .foregroundColor(Color.blue)
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.horizontal, 20.0)
-                                        .padding(.vertical, 5.0)
-                                        .frame(maxWidth: .infinity, maxHeight: .infinity,
-                                               alignment: .topLeading)
-                                }.frame(maxWidth: .infinity, maxHeight: .infinity,
-                                        alignment: .topLeading)
-                            }
-                        }.buttonStyle(PlainButtonStyle())
-                        
+                Group {
+                VStack {
+                    if let nodes = self.parsedContent() {
+                      ForEach(nodes, id: \.self) { node in
+                          switch (node.data) {
+                          case Data.root:
+                              NilView();
+                          case Data.brk:
+                              NilView();
+                          case .listItem(let value):
+                              ListItemView(value: value);
+                          case .text(let value):
+                              TextView(value: value);
+                          case .heading(let value, let rank):
+                              HeadingView(value: value, rank: rank);
+                          case .quote(let value):
+                              QuoteView(value: value);
+                          case .pre(let value, let _):
+                              PreView(value: value);
+                          case .link(let value, let _):
+                              LinkView(value: value);
+                          }
+                      }
                     }
-                }.frame(minWidth: 0,
-                        maxWidth: .infinity,
-                        minHeight: 0,
-                        maxHeight: .infinity,
-                        alignment: .topLeading
-                ) */
-            }.frame(minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: .infinity,
-                    alignment: .topLeading
-            )
-            
-        }.background(Color.black)
+                }.frame(minWidth: 200.0, idealWidth: 640.0, maxWidth: 800.0).padding(.bottom, 100.0)
+            }.frame(maxWidth: .infinity)
+            }
+        }.background(Color("Background"))
     }
 }
 

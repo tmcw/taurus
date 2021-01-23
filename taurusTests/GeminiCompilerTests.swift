@@ -87,7 +87,8 @@ class GeminiCompilerTests: XCTestCase {
 
          func testEmptyList() throws {
              XCTAssertEqual(compileGemini(tokens: parseGemini()("*", true)),
-                            Node(data: taurus.Data.root, position: taurus.Position(start: taurus.Pos(line: 1, column: 1, offset: 0), end: taurus.Pos(line: 1, column: 2, offset: 1)), children: [taurus.Node(data: taurus.Data.list, position: taurus.Position(start: taurus.Pos(line: 1, column: 1, offset: 0), end: taurus.Pos(line: 1, column: 2, offset: 1)), children: [])])
+                            
+                            Node(data: taurus.Data.root, position: taurus.Position(start: taurus.Pos(line: 1, column: 1, offset: 0), end: taurus.Pos(line: 1, column: 2, offset: 1)), children: [taurus.Node(data: taurus.Data.listItem(value: ""), position: taurus.Position(start: taurus.Pos(line: 1, column: 1, offset: 0), end: taurus.Pos(line: 1, column: 2, offset: 1)), children: [])])
                             )
          }
 
