@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Position: Equatable {
+struct Position: Equatable, Hashable {
     var start: Pos;
     var end: Pos;
     init(start: Pos, end: Pos) {
@@ -20,9 +20,8 @@ struct Position: Equatable {
     }
 }
 
-enum Data: Equatable {
+enum Data: Equatable, Hashable {
     case root
-    case list
     case brk
     case listItem(value: String)
     case text(value: String)
@@ -32,10 +31,15 @@ enum Data: Equatable {
     case link(value: String, url: String)
 }
 
-struct Node: Equatable {
+struct Node: Equatable, Hashable {
     var data: Data;
     var position: Position
     var children: [Node] = [];
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(data)
+        hasher.combine(position)
+    }
 }
 
 func compileGemini(tokens: [Token]) -> Node {
@@ -43,7 +47,7 @@ func compileGemini(tokens: [Token]) -> Node {
         start: tokens[0].start,
         end: tokens[tokens.count - 1].end
     )
-    var rootNode: Node = Node(
+    let rootNode: Node = Node(
         data: Data.root,
         position: rootPosition,
         children: []

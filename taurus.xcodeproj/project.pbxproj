@@ -16,6 +16,16 @@
 		9128E04D254F866E005CB262 /* taurusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128E04C254F866E005CB262 /* taurusUITests.swift */; };
 		913C7B6225A9170500EC7D2A /* GeminiParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C7B6125A9170500EC7D2A /* GeminiParser.swift */; };
 		913C7B6725A9176100EC7D2A /* GeminiParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C7B6625A9176100EC7D2A /* GeminiParserTests.swift */; };
+		913EE2F725B272FA00A7D324 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE2F625B272FA00A7D324 /* TextView.swift */; };
+		919BB77725BCB23000B5A21C /* GeminiResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB77625BCB22F00B5A21C /* GeminiResponseParser.swift */; };
+		919BB77F25BCB2B400B5A21C /* GeminiResponseParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB77E25BCB2B400B5A21C /* GeminiResponseParserTest.swift */; };
+		919BB78425BCBC8000B5A21C /* PreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB78325BCBC8000B5A21C /* PreView.swift */; };
+		919BB78925BCBD1600B5A21C /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB78825BCBD1600B5A21C /* LinkView.swift */; };
+		919BB78E25BCBD7B00B5A21C /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB78D25BCBD7B00B5A21C /* HeadingView.swift */; };
+		919BB79325BCBDC400B5A21C /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB79225BCBDC400B5A21C /* QuoteView.swift */; };
+		919BB79825BCBE0700B5A21C /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB79725BCBE0700B5A21C /* ListItemView.swift */; };
+		919BB79D25BCBE8500B5A21C /* NilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB79C25BCBE8500B5A21C /* NilView.swift */; };
+		919BB7B725BCC3C100B5A21C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 919BB7B625BCC3C100B5A21C /* Colors.xcassets */; };
 		91F6D08725AF689800ED0411 /* GeminiCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F6D08625AF689800ED0411 /* GeminiCompiler.swift */; };
 		91F6D08C25AF68C300ED0411 /* GeminiCompilerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F6D08B25AF68C300ED0411 /* GeminiCompilerTests.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +64,16 @@
 		9128E04E254F866E005CB262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		913C7B6125A9170500EC7D2A /* GeminiParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiParser.swift; sourceTree = "<group>"; };
 		913C7B6625A9176100EC7D2A /* GeminiParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiParserTests.swift; sourceTree = "<group>"; };
+		913EE2F625B272FA00A7D324 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		919BB77625BCB22F00B5A21C /* GeminiResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiResponseParser.swift; sourceTree = "<group>"; };
+		919BB77E25BCB2B400B5A21C /* GeminiResponseParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiResponseParserTest.swift; sourceTree = "<group>"; };
+		919BB78325BCBC8000B5A21C /* PreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreView.swift; sourceTree = "<group>"; };
+		919BB78825BCBD1600B5A21C /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
+		919BB78D25BCBD7B00B5A21C /* HeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
+		919BB79225BCBDC400B5A21C /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
+		919BB79725BCBE0700B5A21C /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
+		919BB79C25BCBE8500B5A21C /* NilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilView.swift; sourceTree = "<group>"; };
+		919BB7B625BCC3C100B5A21C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		91F6D08625AF689800ED0411 /* GeminiCompiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiCompiler.swift; sourceTree = "<group>"; };
 		91F6D08B25AF68C300ED0411 /* GeminiCompilerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiCompilerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,11 +130,20 @@
 				9128E02D254F866D005CB262 /* ContentView.swift */,
 				9128E02F254F866E005CB262 /* Assets.xcassets */,
 				9128E034254F866E005CB262 /* Main.storyboard */,
+				919BB7B625BCC3C100B5A21C /* Colors.xcassets */,
 				9128E037254F866E005CB262 /* Info.plist */,
 				9128E038254F866E005CB262 /* taurus.entitlements */,
 				9128E031254F866E005CB262 /* Preview Content */,
 				913C7B6125A9170500EC7D2A /* GeminiParser.swift */,
 				91F6D08625AF689800ED0411 /* GeminiCompiler.swift */,
+				913EE2F625B272FA00A7D324 /* TextView.swift */,
+				919BB77625BCB22F00B5A21C /* GeminiResponseParser.swift */,
+				919BB78325BCBC8000B5A21C /* PreView.swift */,
+				919BB78D25BCBD7B00B5A21C /* HeadingView.swift */,
+				919BB78825BCBD1600B5A21C /* LinkView.swift */,
+				919BB79225BCBDC400B5A21C /* QuoteView.swift */,
+				919BB79725BCBE0700B5A21C /* ListItemView.swift */,
+				919BB79C25BCBE8500B5A21C /* NilView.swift */,
 			);
 			path = taurus;
 			sourceTree = "<group>";
@@ -134,6 +163,7 @@
 				9128E041254F866E005CB262 /* taurusTests.swift */,
 				9128E043254F866E005CB262 /* Info.plist */,
 				91F6D08B25AF68C300ED0411 /* GeminiCompilerTests.swift */,
+				919BB77E25BCB2B400B5A21C /* GeminiResponseParserTest.swift */,
 			);
 			path = taurusTests;
 			sourceTree = "<group>";
@@ -251,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9128E036254F866E005CB262 /* Main.storyboard in Resources */,
+				919BB7B725BCC3C100B5A21C /* Colors.xcassets in Resources */,
 				9128E033254F866E005CB262 /* Preview Assets.xcassets in Resources */,
 				9128E030254F866E005CB262 /* Assets.xcassets in Resources */,
 			);
@@ -278,9 +309,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				9128E02E254F866D005CB262 /* ContentView.swift in Sources */,
+				919BB79325BCBDC400B5A21C /* QuoteView.swift in Sources */,
+				919BB79D25BCBE8500B5A21C /* NilView.swift in Sources */,
 				9128E02C254F866D005CB262 /* AppDelegate.swift in Sources */,
+				919BB79825BCBE0700B5A21C /* ListItemView.swift in Sources */,
+				919BB78925BCBD1600B5A21C /* LinkView.swift in Sources */,
 				913C7B6225A9170500EC7D2A /* GeminiParser.swift in Sources */,
+				919BB78E25BCBD7B00B5A21C /* HeadingView.swift in Sources */,
 				91F6D08725AF689800ED0411 /* GeminiCompiler.swift in Sources */,
+				919BB77725BCB23000B5A21C /* GeminiResponseParser.swift in Sources */,
+				919BB78425BCBC8000B5A21C /* PreView.swift in Sources */,
+				913EE2F725B272FA00A7D324 /* TextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +329,7 @@
 			files = (
 				9128E042254F866E005CB262 /* taurusTests.swift in Sources */,
 				91F6D08C25AF68C300ED0411 /* GeminiCompilerTests.swift in Sources */,
+				919BB77F25BCB2B400B5A21C /* GeminiResponseParserTest.swift in Sources */,
 				913C7B6725A9176100EC7D2A /* GeminiParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,7 +420,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -435,7 +475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
