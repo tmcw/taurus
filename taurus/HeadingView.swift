@@ -15,19 +15,11 @@ struct HeadingView: View {
     func font() -> Font {
       switch (rank) {
           case 1:
-            return Font.title;
+            return Font.system(size: 24).weight(.heavy);
           case 2:
-            if #available(OSX 11.0, *) {
-                return Font.title2
-            } else {
-                return Font.subheadline;
-            };
+            return Font.system(size: 20).weight(.heavy);
           default:
-            if #available(OSX 11.0, *) {
-                return Font.title3
-            } else {
-                return Font.subheadline;
-            };
+            return Font.system(size: 18).weight(.heavy);
       }
     }
     
@@ -46,6 +38,10 @@ struct HeadingView: View {
 
 struct HeadingView_Previews: PreviewProvider {
     static var previews: some View {
-        TextView(value: "Test")
+        VStack {
+          HeadingView(value: "Heading 1", rank: 1)
+          HeadingView(value: "Heading 2", rank: 2)
+          HeadingView(value: "Heading 3", rank: 3)
+        }
     }
 }

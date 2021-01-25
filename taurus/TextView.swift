@@ -13,8 +13,8 @@ struct TextView: View {
     
     var body: some View {
         Text(value)
-            .font(.body)
-            .lineSpacing(5.0)
+            .font(.custom("Georgia", size: 20))
+            .lineSpacing(10.0)
             .foregroundColor(Color("Foreground"))
             .multilineTextAlignment(.leading)
             .padding(.horizontal, 20.0)
@@ -26,6 +26,9 @@ struct TextView: View {
 
 struct TextView_Previews: PreviewProvider {
     static var previews: some View {
-        TextView(value: "Test")
+        TextView(value: """
+Test, this is a paragraph of preview text. In Gemini, this might be a paragraph. But it should at least be long enough to wrap.
+"""
+        )
     }
 }

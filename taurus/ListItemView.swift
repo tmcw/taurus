@@ -12,20 +12,24 @@ struct ListItemView: View {
     var value: String
     
     var body: some View {
-        Text(value)
-            .font(.system(.body, design: .monospaced))
-            .lineSpacing(5.0)
-            .foregroundColor(Color.white)
-            .multilineTextAlignment(.leading)
-            .padding(.horizontal, 20.0)
-            .padding(.vertical, 5.0)
-            .lineLimit(nil)
-            .frame(maxWidth: .infinity, alignment: .topLeading)
+        HStack(alignment: .firstTextBaseline, spacing: 5.0) {
+          Text("•")
+            .font(.custom("Georgia", size: 20))
+          Text(value)
+              .font(.custom("Georgia", size: 20))
+              .lineSpacing(5.0)
+              .foregroundColor(Color("Foreground"))
+              .multilineTextAlignment(.leading)
+              .padding(.horizontal, 5.0)
+              .padding(.vertical, 5.0)
+              .lineLimit(nil)
+              .frame(maxWidth: .infinity, alignment: .topLeading)
+        }.padding(.horizontal, 20.0)
     }
 }
 
 struct ListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TextView(value: "Test")
+        ListItemView(value: "I am a list item that can occupy multiple lines and thus will warp eveyt")
     }
 }

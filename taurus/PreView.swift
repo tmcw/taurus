@@ -12,19 +12,29 @@ struct PreView: View {
     var value: String
     
     var body: some View {
-        Text(value)
-            .font(.system(.body, design: .monospaced))
-            .lineSpacing(5.0)
-            .foregroundColor(Color("Pre"))
-            .multilineTextAlignment(.leading)
-            .padding(.horizontal, 20.0)
-            .padding(.vertical, 5.0)
-            .frame(maxWidth: .infinity, alignment: .topLeading)
+        Group {
+          ScrollView(.horizontal) {
+            Text(value)
+              .font(.system(.body, design: .monospaced))
+              .lineSpacing(5.0)
+              .foregroundColor(Color("Pre"))
+              .multilineTextAlignment(.leading)
+              .padding(.horizontal, 20.0)
+              .padding(.vertical, 20.0)
+              .frame(maxWidth: .infinity, alignment: .topLeading)
+              .background(Color("PreBackground").cornerRadius(5.0))
+          }
+        }.padding(.horizontal, 20.0).padding(.vertical, 20.0)
     }
 }
 
 struct PreView_Previews: PreviewProvider {
     static var previews: some View {
-        TextView(value: "Test")
+        PreView(value: """
+function x(y) {
+  let x = "long Line that should not wrap because this is a preformatted element";
+  return y + 1;
+}
+""")
     }
 }

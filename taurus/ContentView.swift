@@ -22,7 +22,8 @@ struct ContentView: View {
     
     @State private var tcpStreamAlive: Bool = false
     @State private var online: Bool = false
-    @State private var url: String = "gemini://drewdevault.com"
+    @State private var currentUrl: String = "gemini://drewdevault.com"
+    @State private var inputUrl: String = "gemini://drewdevault.com"
     
     // https://stackoverflow.com/questions/54452129/how-to-create-ios-nwconnection-for-tls-with-self-signed-cert
     func createTLSParameters(allowInsecure: Bool, queue: DispatchQueue) -> NWParameters {
@@ -49,7 +50,7 @@ struct ContentView: View {
     
     private func loadUrl() {
         self.content = ""
-        let u = URL(string: url)!;
+        let u = URL(string: inputUrl)!;
         
         if (u.scheme != "gemini") {
             // Exit
@@ -63,7 +64,7 @@ struct ContentView: View {
         self.setupReceive(on: nwConnection)
         
         nwConnection.start(queue: queue)
-        nwConnection.send(content: "\(url)\r\n".data(using: .utf8)!, completion: .contentProcessed( { error in
+        nwConnection.send(content: "\(inputUrl)\r\n".data(using: .utf8)!, completion: .contentProcessed( { error in
             print("data sent")
             if let error = error {
                 print("got error")
@@ -72,6 +73,7 @@ struct ContentView: View {
             }
             // print("connection did send, data: \(data as NSData)")
         }))
+        currentUrl = inputUrl;
     }
     
     private func setupReceive(on connection: NWConnection) {
@@ -138,10 +140,15 @@ struct ContentView: View {
         return parseResponse(content: self.content)?.tree.children;
     }
     
+    func navigate(url: String) {
+        inputUrl = url;
+        loadUrl();
+    }
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0.0) {
             HStack {
-                TextField("URL", text: $url, onCommit: loadUrl)
+                TextField("URL", text: $inputUrl, onCommit: loadUrl)
                     .padding(10.0)
                     .textFieldStyle(PlainTextFieldStyle())
                     .foregroundColor(Color("Foreground"))
@@ -152,7 +159,7 @@ struct ContentView: View {
             
             ScrollView(.vertical) {
                 Group {
-                VStack {
+                    VStack(alignment: .leading) {
                     if let nodes = self.parsedContent() {
                       ForEach(nodes, id: \.self) { node in
                           switch (node.data) {
@@ -170,12 +177,15 @@ struct ContentView: View {
                               QuoteView(value: value);
                           case .pre(let value, let _):
                               PreView(value: value);
-                          case .link(let value, let _):
-                              LinkView(value: value);
+                          case .link(let value, let url):
+                            LinkView(value: value) {
+                                print("Clicked!");
+                                navigate(url: url);
+                            };
                           }
                       }
                     }
-                }.frame(minWidth: 200.0, idealWidth: 640.0, maxWidth: 800.0).padding(.bottom, 100.0)
+                    }.frame(minWidth: 200.0, idealWidth: 640.0, maxWidth: 800.0).padding(.bottom, 100.0).padding(.top, 50.0)
             }.frame(maxWidth: .infinity)
             }
         }.background(Color("Background"))
