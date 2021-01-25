@@ -12,20 +12,21 @@ struct QuoteView: View {
     var value: String
     
     var body: some View {
-        Text(value)
-            .font(.system(.body, design: .monospaced))
-            .lineSpacing(5.0)
-            .foregroundColor(Color.white)
-            .multilineTextAlignment(.leading)
-            .padding(.horizontal, 20.0)
-            .padding(.vertical, 5.0)
-            .lineLimit(nil)
-            .frame(maxWidth: .infinity, alignment: .topLeading)
+      Text(value)
+          .font(.custom("Georgia", size: 18))
+          .lineSpacing(5.0)
+          .foregroundColor(Color("Foreground"))
+          .multilineTextAlignment(.leading)
+          .padding(.leading, 40.0)
+          .padding(.trailing, 20.0)
+          .padding(.vertical, 15.0)
+          .lineLimit(nil)
+          .frame(maxWidth: .infinity, alignment: .topLeading)
     }
 }
 
 struct QuoteView_Previews: PreviewProvider {
     static var previews: some View {
-        TextView(value: "Test")
+        QuoteView(value: "Test")
     }
 }
