@@ -177,6 +177,8 @@ struct ContentView: View {
                               QuoteView(value: value);
                           case .pre(let value, let _):
                               PreView(value: value);
+                          case .webLink(let value, let url):
+                              WebLinkView(value: value, url: url);
                           case .link(let value, let url):
                             LinkView(value: value) {
                                 print("Clicked!");
