@@ -147,15 +147,8 @@ struct ContentView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0.0) {
-            HStack {
-                TextField("URL", text: $inputUrl, onCommit: loadUrl)
-                    .padding(10.0)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .foregroundColor(Color("Foreground"))
-                    .background(Color("AccentBackground").cornerRadius(5.0))
-            }.padding(10.0)
-            
-            // Divider().padding(0.0)
+            // TODO: state management
+            // NavigationView(inputUrl: $inputUrl)
             
             ScrollView(.vertical) {
                 Group {
