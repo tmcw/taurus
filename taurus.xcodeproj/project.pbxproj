@@ -18,6 +18,9 @@
 		913C7B6725A9176100EC7D2A /* GeminiParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C7B6625A9176100EC7D2A /* GeminiParserTests.swift */; };
 		913EE2F725B272FA00A7D324 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE2F625B272FA00A7D324 /* TextView.swift */; };
 		9190CCE825BF6F84009EC6F2 /* WebLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9190CCE725BF6F84009EC6F2 /* WebLinkView.swift */; };
+		9190CCED25BF7F07009EC6F2 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9190CCEC25BF7F07009EC6F2 /* NavigationView.swift */; };
+		9190CCF225BF9FE4009EC6F2 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9190CCF125BF9FE4009EC6F2 /* Page.swift */; };
+		9190CCF725BFA10F009EC6F2 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9190CCF625BFA10F009EC6F2 /* PageView.swift */; };
 		919BB77725BCB23000B5A21C /* GeminiResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB77625BCB22F00B5A21C /* GeminiResponseParser.swift */; };
 		919BB77F25BCB2B400B5A21C /* GeminiResponseParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB77E25BCB2B400B5A21C /* GeminiResponseParserTest.swift */; };
 		919BB78425BCBC8000B5A21C /* PreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BB78325BCBC8000B5A21C /* PreView.swift */; };
@@ -67,6 +70,9 @@
 		913C7B6625A9176100EC7D2A /* GeminiParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiParserTests.swift; sourceTree = "<group>"; };
 		913EE2F625B272FA00A7D324 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		9190CCE725BF6F84009EC6F2 /* WebLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinkView.swift; sourceTree = "<group>"; };
+		9190CCEC25BF7F07009EC6F2 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		9190CCF125BF9FE4009EC6F2 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		9190CCF625BFA10F009EC6F2 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		919BB77625BCB22F00B5A21C /* GeminiResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiResponseParser.swift; sourceTree = "<group>"; };
 		919BB77E25BCB2B400B5A21C /* GeminiResponseParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiResponseParserTest.swift; sourceTree = "<group>"; };
 		919BB78325BCBC8000B5A21C /* PreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreView.swift; sourceTree = "<group>"; };
@@ -147,6 +153,9 @@
 				919BB79725BCBE0700B5A21C /* ListItemView.swift */,
 				919BB79C25BCBE8500B5A21C /* NilView.swift */,
 				9190CCE725BF6F84009EC6F2 /* WebLinkView.swift */,
+				9190CCEC25BF7F07009EC6F2 /* NavigationView.swift */,
+				9190CCF125BF9FE4009EC6F2 /* Page.swift */,
+				9190CCF625BFA10F009EC6F2 /* PageView.swift */,
 			);
 			path = taurus;
 			sourceTree = "<group>";
@@ -311,6 +320,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9190CCED25BF7F07009EC6F2 /* NavigationView.swift in Sources */,
+				9190CCF725BFA10F009EC6F2 /* PageView.swift in Sources */,
 				9128E02E254F866D005CB262 /* ContentView.swift in Sources */,
 				919BB79325BCBDC400B5A21C /* QuoteView.swift in Sources */,
 				919BB79D25BCBE8500B5A21C /* NilView.swift in Sources */,
@@ -324,6 +335,7 @@
 				919BB77725BCB23000B5A21C /* GeminiResponseParser.swift in Sources */,
 				919BB78425BCBC8000B5A21C /* PreView.swift in Sources */,
 				913EE2F725B272FA00A7D324 /* TextView.swift in Sources */,
+				9190CCF225BF9FE4009EC6F2 /* Page.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
