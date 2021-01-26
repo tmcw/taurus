@@ -22,7 +22,7 @@ struct ContentView: View {
     
     @State private var tcpStreamAlive: Bool = false
     @State private var online: Bool = false
-    @State private var page: Page = Page(url: "", status: PageStatus.none, document: nil)
+    @State private var page: Page = Page(url: nil, status: PageStatus.none, document: nil, source: "")
     @State private var inputUrl: String = "gemini://drewdevault.com"
     
     // https://stackoverflow.com/questions/54452129/how-to-create-ios-nwconnection-for-tls-with-self-signed-cert
@@ -57,7 +57,7 @@ struct ContentView: View {
             // Exit
             return;
         }
-        page.url = inputUrl;
+        page.url = URL(string: inputUrl);
         let host = u.host;
         
         let queue = DispatchQueue(label: "taurus")
@@ -91,6 +91,7 @@ struct ContentView: View {
             if isComplete {
                 connection.cancel()
                 self.tcpStreamAlive = false
+                page.source = self.content;
                 page.document = parseResponse(content: self.content);
             } else if let error = error {
                 print("setupReceive: error \(error.localizedDescription)")
@@ -145,10 +146,22 @@ struct ContentView: View {
         loadUrl();
     }
     
+    func save() {
+        let paths = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)
+        let filename = page.url!.lastPathComponent;
+        let path = paths[0].appendingPathComponent(filename)
+        print("saving to \(path)")
+        do {
+            try page.source.write(to: path, atomically: true, encoding: .utf8)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0.0) {
             // TODO: state management
-            NavigationView(inputUrl: $inputUrl, onGo: loadUrl)
+            NavigationView(inputUrl: $inputUrl, onGo: loadUrl, save: save)
             PageView(page: page, navigate: navigate)
         }.background(Color("Background"))
     }

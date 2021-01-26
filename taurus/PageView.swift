@@ -37,7 +37,7 @@ struct PageView: View {
                             case let .link(value, url):
                                 LinkView(value: value) {
                                     print("Navigating to \(url), relative to \(page.url)")
-                                    let u = URL(string: "\(url)", relativeTo: URL(string: page.url))!
+                                    let u = URL(string: "\(url)", relativeTo: page.url)!
                                     navigate("\(u.absoluteURL)")
                                 }
                             }
@@ -54,9 +54,10 @@ struct PageView: View {
 struct PageView_Previews: PreviewProvider {
     static var previews: some View {
         var page = Page(
-            url: "gemini://fake.com",
+            url: URL(string:"gemini://fake.com"),
             status: PageStatus.loaded,
-            document: parseResponse(content: "text/gemini\rTest"))
+            document: parseResponse(content: "text/gemini\rTest"),
+            source: "text/gemini\rTest")
         PageView(page: page, navigate: {_ in })
     }
 }

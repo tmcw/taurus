@@ -14,13 +14,15 @@ enum PageStatus: Equatable, Hashable {
 }
 
 class Page: ObservableObject {
-    @Published var url = ""
+    @Published var url: URL? = nil
     @Published var status: PageStatus = PageStatus.none;
     @Published var document: GeminiDocument? = nil;
+    @Published var source: String = ""
     
-    init(url: String, status: PageStatus, document: GeminiDocument?) {
+    init(url: URL?, status: PageStatus, document: GeminiDocument?, source: String) {
         self.url = url
         self.status = status
         self.document = document
+        self.source = source
     }
 }

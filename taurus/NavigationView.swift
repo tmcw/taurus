@@ -10,6 +10,7 @@ import SwiftUI
 struct NavigationView: View {
     @Binding var inputUrl: String
     let onGo: () -> Void
+    let save: () -> Void
 
     func go() {}
 
@@ -35,6 +36,15 @@ struct NavigationView: View {
                 .textFieldStyle(PlainTextFieldStyle())
                 .foregroundColor(Color("Foreground"))
                 .background(Color("AccentBackground").cornerRadius(5.0))
+                
+            if #available(OSX 11.0, *) {
+                Button(action: save) {
+                    Image(systemName: "square.and.arrow.down")
+                }.buttonStyle(PlainButtonStyle())
+                .keyboardShortcut("S", modifiers: [.command])
+            } else {
+                // Fallback on earlier versions
+            }
         }.padding(10.0)
     }
 }
@@ -42,6 +52,6 @@ struct NavigationView: View {
 struct NavigationView_Previews: PreviewProvider {
     @State static var inputUrl = "gemini://foo.com"
     static var previews: some View {
-        NavigationView(inputUrl: $inputUrl, onGo: {})
+        NavigationView(inputUrl: $inputUrl, onGo: {}, save: {})
     }
 }
