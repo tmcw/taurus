@@ -22,7 +22,7 @@ struct ContentView: View {
     
     @State private var tcpStreamAlive: Bool = false
     @State private var online: Bool = false
-    @State private var currentUrl: String = "gemini://drewdevault.com"
+    @State private var page: Page = Page(url: "", status: PageStatus.none, document: nil)
     @State private var inputUrl: String = "gemini://drewdevault.com"
     
     // https://stackoverflow.com/questions/54452129/how-to-create-ios-nwconnection-for-tls-with-self-signed-cert
@@ -50,16 +50,23 @@ struct ContentView: View {
     
     private func loadUrl() {
         self.content = ""
+        print("turning \(inputUrl) into a url…")
         let u = URL(string: inputUrl)!;
         
         if (u.scheme != "gemini") {
             // Exit
+            return;
         }
+        page.url = inputUrl;
         let host = u.host;
         
         let queue = DispatchQueue(label: "taurus")
         let hostEndpoint = NWEndpoint.Host.init(host!)
-        let nwConnection = NWConnection(host: hostEndpoint, port: 1965, using: createTLSParameters(allowInsecure: true, queue: queue))
+        let nwConnection = NWConnection(
+            host: hostEndpoint,
+            port: 1965,
+            using: createTLSParameters(allowInsecure: true, queue: queue)
+        )
         nwConnection.stateUpdateHandler = self.stateDidChange(to:)
         self.setupReceive(on: nwConnection)
         
@@ -71,23 +78,20 @@ struct ContentView: View {
                 // self.connectionDidFail(error: error)
                 return
             }
-            // print("connection did send, data: \(data as NSData)")
         }))
-        currentUrl = inputUrl;
     }
     
     private func setupReceive(on connection: NWConnection) {
         connection.receive(minimumIncompleteLength: 1, maximumLength: 65536) { (data, contentContext, isComplete, error) in
-            print("got receive")
             // Read data off the stream
             if let data = data, !data.isEmpty {
                 self.content += String(decoding: data, as: UTF8.self)
             }
             
             if isComplete {
-                print("setupReceive: isComplete handle end of stream")
                 connection.cancel()
                 self.tcpStreamAlive = false
+                page.document = parseResponse(content: self.content);
             } else if let error = error {
                 print("setupReceive: error \(error.localizedDescription)")
             } else {
@@ -97,7 +101,6 @@ struct ContentView: View {
     }
     
     private func stateDidChange(to state: NWConnection.State) {
-        print("got state change")
         switch state {
         case .setup:
             self.notifyDelegateOnChange(newStatusFlag: false, connectivityStatus: "setup")
@@ -136,11 +139,8 @@ struct ContentView: View {
         }
     }
     
-    func parsedContent() -> [Node]? {
-        return parseResponse(content: self.content)?.tree.children;
-    }
-    
     func navigate(url: String) {
+        print("attempting navigation to \(url)")
         inputUrl = url;
         loadUrl();
     }
@@ -148,41 +148,8 @@ struct ContentView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 0.0) {
             // TODO: state management
-            // NavigationView(inputUrl: $inputUrl)
-            
-            ScrollView(.vertical) {
-                Group {
-                    VStack(alignment: .leading) {
-                    if let nodes = self.parsedContent() {
-                      ForEach(nodes, id: \.self) { node in
-                          switch (node.data) {
-                          case Data.root:
-                              NilView();
-                          case Data.brk:
-                              NilView();
-                          case .listItem(let value):
-                              ListItemView(value: value);
-                          case .text(let value):
-                              TextView(value: value);
-                          case .heading(let value, let rank):
-                              HeadingView(value: value, rank: rank);
-                          case .quote(let value):
-                              QuoteView(value: value);
-                          case .pre(let value, let _):
-                              PreView(value: value);
-                          case .webLink(let value, let url):
-                              WebLinkView(value: value, url: url);
-                          case .link(let value, let url):
-                            LinkView(value: value) {
-                                print("Clicked!");
-                                navigate(url: url);
-                            };
-                          }
-                      }
-                    }
-                    }.frame(minWidth: 200.0, idealWidth: 640.0, maxWidth: 800.0).padding(.bottom, 100.0).padding(.top, 50.0)
-            }.frame(maxWidth: .infinity)
-            }
+            NavigationView(inputUrl: $inputUrl, onGo: loadUrl)
+            PageView(page: page, navigate: navigate)
         }.background(Color("Background"))
     }
 }

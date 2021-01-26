@@ -15,11 +15,11 @@ struct HeadingView: View {
     func font() -> Font {
       switch (rank) {
           case 1:
-            return Font.system(size: 24).weight(.heavy);
+            return Font.system(size: 24).weight(.bold);
           case 2:
-            return Font.system(size: 20).weight(.heavy);
+            return Font.system(size: 20).weight(.bold);
           default:
-            return Font.system(size: 18).weight(.heavy);
+            return Font.system(size: 18).weight(.bold);
       }
     }
     

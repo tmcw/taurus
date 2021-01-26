@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct NavigationView: View {
-    // TODO: state management
-    @State private var inputUrl: String = "gemini://drewdevault.com"
-
-    func loadUrl() {
-        // TODO: implement
-    }
+    @Binding var inputUrl: String
+    let onGo: () -> Void
 
     func go() {}
 
@@ -33,24 +29,19 @@ struct NavigationView: View {
                 // Fallback on earlier versions
             }
             }.buttonStyle(PlainButtonStyle())
-            TextField("URL", text: $inputUrl, onCommit: loadUrl)
+            
+            TextField("URL", text: $inputUrl, onCommit: onGo)
                 .padding(10.0)
                 .textFieldStyle(PlainTextFieldStyle())
                 .foregroundColor(Color("Foreground"))
                 .background(Color("AccentBackground").cornerRadius(5.0))
-            Button(action: go) {
-                if #available(OSX 11.0, *) {
-                    Image(systemName: "chevron.forward.square")
-                } else {
-                    // Fallback on earlier versions
-                }
-            }.buttonStyle(PlainButtonStyle())
         }.padding(10.0)
     }
 }
 
 struct NavigationView_Previews: PreviewProvider {
+    @State static var inputUrl = "gemini://foo.com"
     static var previews: some View {
-        NavigationView()
+        NavigationView(inputUrl: $inputUrl, onGo: {})
     }
 }

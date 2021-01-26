@@ -28,8 +28,8 @@ enum Data: Equatable, Hashable {
     case heading(value: String, rank: Int)
     case quote(value: String)
     case pre(value: String, alt: String?)
-    case link(value: String, url: String)
-    case webLink(value: String, url: String)
+    case link(value: String, url: URL)
+    case webLink(value: String, url: URL)
 }
 
 struct Node: Equatable, Hashable {
@@ -99,10 +99,12 @@ func compileGemini(tokens: [Token]) -> Node {
                 }
             }
             
-            if url.hasPrefix("gemini://") {
-                addNode(node: Node(data: Data.link(value: value, url: url), position: Position(fromToken: token)))
+            let u = URL(string: url)!;
+            
+            if u.scheme == "gemini" || u.scheme == nil {
+                addNode(node: Node(data: Data.link(value: value, url: u), position: Position(fromToken: token)))
             } else {
-                addNode(node: Node(data: Data.webLink(value: value, url: url), position: Position(fromToken: token)))
+                addNode(node: Node(data: Data.webLink(value: value, url: u), position: Position(fromToken: token)))
             }
         } else if (token.type == "listSequence") {
             if (tokens[index + 1].type == "whitespace") {
