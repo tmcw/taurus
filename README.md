@@ -1,5 +1,7 @@
 # taurus
 
+![Screenshot](./taurus.png)
+
 _Authors note_: this is a SwiftUI version of a [Gemini](https://gemini.circumlunar.space/) browser for Mac.
 My goals with this project were:
 
@@ -17,3 +19,14 @@ bits are a Swift port of [wooorm's dioscuri parser for the gemtext format](https
 which makes the rest of the project sort of clear. The network layer is very unfinished,
 since Gemini's [security model](https://drewdevault.com/2020/09/21/Gemini-TOFU.html) is
 a little tricky, and my understanding of how to do that on the mac is fragmentary at best.
+
+---
+
+Basically this project is at the point where it can load a gemini page, show all the kinds
+of content in it, navigate to other pages, and open web links in another browser.
+
+Where it started to get hard was just any sort of UI niceity - resetting scroll when going
+from one page to another, handling hover and focus states, allowing text selection - all
+of these are thoroughly difficult with SwiftUI. Thankfully all of these also have very little
+to do with the Gemini-parsing guts of the project, so that part can be reused in the future
+project.
